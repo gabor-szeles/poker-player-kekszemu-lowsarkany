@@ -15,8 +15,8 @@ public class Player {
         JsonObject jobject = request.getAsJsonObject();
         int minRaise = jobject.getAsJsonPrimitive("minimum_raise").getAsInt();
         int pot = jobject.getAsJsonPrimitive("pot").getAsInt();
-        int playerStack;
 
+        int playerStack = 0;
         boolean firstRound = true;
         JsonArray allcards = new JsonArray();
         JsonArray playerCards = new JsonArray();
@@ -27,7 +27,7 @@ public class Player {
         //start player bet buy in
 
             int currentBuyIn = jobject.getAsJsonPrimitive("current_buy_in").getAsInt();
-            int playerCurrentBet;
+            int playerCurrentBet = 0;
 
         //end player bet buy in
         if (communityCards.size() > 0){
@@ -36,12 +36,13 @@ public class Player {
 
         // get stacks
         for (int i = 0; i < players.size(); i++) {
-            int stack = players.get(i).getAsJsonPrimitive("stack").getAsInt();
-            if(players.get(i).getAsString("name").equals("Kekszemu Lowsarkany")){
+            JsonObject player = players.get(i).getAsJsonObject();
+            int stack = player.getAsJsonPrimitive("stack").getAsInt();
+            if(player.get("name").toString().equals("Kekszemu Lowsarkany")){
                 playerStack = stack;
-                playerCards = players.get(i).getAsJsonArray("hole_cards");
+                playerCards = player.getAsJsonArray("hole_cards");
                 // player current bet
-                playerCurrentBet = players.get(i).getAsJsonPrimitive("bet").getAsInt();
+                playerCurrentBet = player.getAsJsonPrimitive("bet").getAsInt();
             } else{
                 enemyStacks.add(stack);
             }
@@ -53,11 +54,6 @@ public class Player {
         for (int i = 0; i< playerCards.size(); i++){
             allcards.add(playerCards.get(i));
         }
-
-        SameCardCases(allcards);
-
-
-
 
 
         //check cards
@@ -76,7 +72,8 @@ public class Player {
             int poker = 0;
             List<String> ranks = new ArrayList<>();
             for (int i = 0; i < cards.size(); i++) {
-                ranks.add(cards.get(i).getAsString("rank"));
+                JsonObject actualCard = cards.get(i).getAsJsonObject();
+                ranks.add(actualCard.get("rank").toString());
             }
 
             Set<String> ranksSet = new HashSet<String>(ranks);
@@ -120,7 +117,7 @@ public class Player {
     }
 
     public static int calculateBet(int odds, boolean firstRound, int currentBuyIn, int playerCurrentBet, int minRaise){
-        int bet;
+        int bet = 0;
         if(firstRound){
             if(odds == 0){
                 if(currentBuyIn == playerCurrentBet){
