@@ -135,13 +135,13 @@ public class Player {
                     bet = currentBuyIn - playerCurrentBet;
                     break;
                 case 1:
-                    bet = currentBuyIn - playerCurrentBet;
-                    break;
-                case 2:
                     bet = currentBuyIn - playerCurrentBet + minRaise;
                     break;
+                case 2:
+                    bet = currentBuyIn - playerCurrentBet + (int)Math.ceil(stack*0.3);
+                    break;
                 case 3:
-                    bet = currentBuyIn - playerCurrentBet + (int)Math.ceil(stack*0.2);
+                    bet = currentBuyIn - playerCurrentBet + (int)Math.ceil(stack*0.5);
                     break;
                 case 4:
                     bet = currentBuyIn - playerCurrentBet + stack;
