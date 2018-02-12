@@ -37,7 +37,7 @@ public class Player {
         for (int i = 0; i < players.size(); i++) {
             int stack = players.get(i).getAsJsonPrimitive("stack").getAsInt();
             String player = players.get(i).toString();
-            System.out.println(player);
+            System.err.println(player);
             if(players.get(i).getAsString("name").equals("Kekszemu Lowsarkany")){
                 playerStack = stack;
                 playerCards = players.get(i).getAsJsonArray("hole_cards");
