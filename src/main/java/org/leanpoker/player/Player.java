@@ -58,8 +58,8 @@ public class Player {
         }
 
         int odds = SameCardCases(allcards);
-        // minRaise = calculateBet(odds, firstRound, currentBuyIn, playerCurrentBet, minRaise, playerStack);
-
+        //minRaise = calculateBet(odds, firstRound, currentBuyIn, playerCurrentBet, minRaise, playerStack);
+        minRaise = braveBetting(minRaise, playerStack);
         return minRaise;
     }
 
@@ -152,6 +152,13 @@ public class Player {
             }
         }
         return bet;
+    }
+    public static int braveBetting(int minRaise, int stack){
+
+       Random rand = new Random();
+       int percentage = rand.nextInt(101);
+       return percentage/100 * stack;
+
     }
 
 }
