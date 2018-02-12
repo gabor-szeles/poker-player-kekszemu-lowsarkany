@@ -37,6 +37,7 @@ public class Player {
         for (int i = 0; i < players.size(); i++) {
             int stack = players.get(i).getAsJsonPrimitive("stack").getAsInt();
             if(players.get(i).getAsString("name").equals("Kekszemu Lowsarkany")){
+                System.out.println(players.get(i).getClass().getSimpleName());
                 playerStack = stack;
                 playerCards = players.get(i).getAsJsonArray("hole_cards");
                 // player current bet
