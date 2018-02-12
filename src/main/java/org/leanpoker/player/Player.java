@@ -18,10 +18,14 @@ public class Player {
         int minRaise = jobject.getAsJsonPrimitive("minimum_raise").getAsInt();
         int pot = jobject.getAsJsonPrimitive("pot").getAsInt();
         int playerStack;
+        boolean firstRound = true;
         JsonArray playerCards;
         List<Integer> enemyStacks = new ArrayList<>();
         JsonArray players = jobject.getAsJsonArray("players");
         JsonArray communityCards = jobject.getAsJsonArray("community_cards");
+        if (communityCards.size() > 0){
+            firstRound = false;
+        }
         // get stacks
         for (int i = 0; i < players.size(); i++) {
             int stack = players.get(i).getAsJsonPrimitive("stack").getAsInt();
@@ -36,10 +40,13 @@ public class Player {
         //check cards
 
 
-
         return minRaise;
     }
 
     public static void showdown(JsonElement game) {
     }
+
+    //public static int calculateBet(int odds){
+//
+//    }
 }
