@@ -153,11 +153,11 @@ public class Player {
         }
         return bet;
     }
-    public static int braveBetting(int minRaise, int stack){
+    public static int braveBetting(int minRaise, int stack, int currentBuyIn, int playerCurrentBet){
 
        Random rand = new Random();
-       int percentage = rand.nextInt(101);
-       return percentage/100 * stack;
+       int percentage = rand.nextInt(100)+1;
+       return currentBuyIn - playerCurrentBet + ((percentage/100) * stack);
 
     }
 
