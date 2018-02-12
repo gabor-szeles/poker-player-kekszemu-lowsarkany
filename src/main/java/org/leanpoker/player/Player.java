@@ -122,12 +122,12 @@ public class Player {
         if(firstRound){
             if(odds == 0){
                 if(currentBuyIn == playerCurrentBet){
-                    bet = currentBuyIn - playerCurrentBet;
+                    bet = 0;
                 } else{
                     bet = currentBuyIn - playerCurrentBet;
                 }
             } else{
-                bet = 0;
+                bet = currentBuyIn - playerCurrentBet + minRaise;
             }
         } else{
             switch (odds){
