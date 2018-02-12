@@ -55,9 +55,8 @@ public class Player {
             allcards.add(playerCards.get(i));
         }
 
-
-        //check cards
-
+        int odds = SameCardCases(allcards);
+        minRaise = calculateBet(odds, firstRound, currentBuyIn, playerCurrentBet, minRaise, playerStack);
 
         return minRaise;
     }
@@ -116,7 +115,7 @@ public class Player {
 
     }
 
-    public static int calculateBet(int odds, boolean firstRound, int currentBuyIn, int playerCurrentBet, int minRaise){
+    public static int calculateBet(int odds, boolean firstRound, int currentBuyIn, int playerCurrentBet, int minRaise, int stack){
         int bet = 0;
         if(firstRound){
             if(odds == 0){
@@ -127,6 +126,27 @@ public class Player {
                 }
             } else{
                 bet = currentBuyIn - playerCurrentBet + minRaise;
+            }
+        } else{
+            switch (odds){
+                case 0:
+                    bet = currentBuyIn - playerCurrentBet;
+                    break;
+                case 1:
+                    bet = currentBuyIn - playerCurrentBet;
+                    break;
+                case 2:
+                    bet = currentBuyIn - playerCurrentBet + minRaise;
+                    break;
+                case 3:
+                    bet = currentBuyIn - playerCurrentBet + (int)Math.ceil(stack*0.2);
+                    break;
+                case 4:
+                    bet = currentBuyIn - playerCurrentBet + (int)Math.ceil(stack*0.5);
+                    break;
+                case 5:
+                    bet = currentBuyIn - playerCurrentBet + stack;
+                    break;
             }
         }
         return bet;
