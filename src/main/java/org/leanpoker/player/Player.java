@@ -23,6 +23,13 @@ public class Player {
         List<Integer> enemyStacks = new ArrayList<>();
         JsonArray players = jobject.getAsJsonArray("players");
         JsonArray communityCards = jobject.getAsJsonArray("community_cards");
+
+        //start player bet buy in
+
+            int currentBuyIn = jobject.getAsJsonPrimitive("current_buy_in").getAsInt();
+            int playerCurrentBet;
+
+        //end player bet buy in
         if (communityCards.size() > 0){
             firstRound = false;
         }
@@ -32,6 +39,8 @@ public class Player {
             if(players.get(i).getAsString("name").equals("Kekszemu Lowsarkany")){
                 playerStack = stack;
                 playerCards = players.get(i).getAsJsonArray("hole_cards");
+                // player current bet
+                playerCurrentBet = players.get(i).getAsJsonPrimitive("bet").getAsInt();
             } else{
                 enemyStacks.add(stack);
             }
@@ -46,7 +55,19 @@ public class Player {
     public static void showdown(JsonElement game) {
     }
 
-    //public static int calculateBet(int odds){
-//
-//    }
+    public static int calculateBet(int odds, boolean firstRound, int currentBuyIn, int playerCurrentBet, int minRaise){
+        int bet;
+        if(firstRound){
+            if(odds == 0){
+                if(currentBuyIn == playerCurrentBet){
+                    bet = 0;
+                } else{
+                    bet = currentBuyIn - playerCurrentBet;
+                }
+            } else{
+                bet = currentBuyIn - playerCurrentBet + minRaise;
+            }
+        }
+        return bet;
+    }
 }
