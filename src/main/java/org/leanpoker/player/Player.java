@@ -17,7 +17,7 @@ public class Player {
         JsonObject jobject = request.getAsJsonObject();
         int minRaise = jobject.getAsJsonPrimitive("minimum_raise").getAsInt();
         int pot = jobject.getAsJsonPrimitive("pot").getAsInt();
-        int playerStack;
+        int playerStack = 0;
         boolean firstRound = true;
         JsonArray playerCards;
         List<Integer> enemyStacks = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Player {
         //start player bet buy in
 
             int currentBuyIn = jobject.getAsJsonPrimitive("current_buy_in").getAsInt();
-            int playerCurrentBet;
+            int playerCurrentBet = 0;
 
         //end player bet buy in
         if (communityCards.size() > 0){
@@ -56,7 +56,7 @@ public class Player {
     }
 
     public static int calculateBet(int odds, boolean firstRound, int currentBuyIn, int playerCurrentBet, int minRaise){
-        int bet;
+        int bet = 0;
         if(firstRound){
             if(odds == 0){
                 if(currentBuyIn == playerCurrentBet){
