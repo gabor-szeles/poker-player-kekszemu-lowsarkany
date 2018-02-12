@@ -18,10 +18,11 @@ public class Player {
         int minRaise = jobject.getAsJsonPrimitive("minimum_raise").getAsInt();
         int pot = jobject.getAsJsonPrimitive("pot").getAsInt();
         int playerStack;
-        JsonArray playerCards;
         List<Integer> enemyStacks = new ArrayList<>();
         JsonArray players = jobject.getAsJsonArray("players");
         JsonArray communityCards = jobject.getAsJsonArray("community_cards");
+        JsonArray allcards = new JsonArray();
+        JsonArray playerCards = new JsonArray();
         // get stacks
         for (int i = 0; i < players.size(); i++) {
             int stack = players.get(i).getAsJsonPrimitive("stack").getAsInt();
@@ -33,6 +34,19 @@ public class Player {
             }
         }
 
+        for (int i = 0; i< communityCards.size(); i++){
+            allcards.add(communityCards.get(i));
+        }
+        for (int i = 0; i< playerCards.size(); i++){
+            allcards.add(playerCards.get(i));
+        }
+
+        Pair(allcards);
+
+
+
+
+
         //check cards
 
 
@@ -41,5 +55,10 @@ public class Player {
     }
 
     public static void showdown(JsonElement game) {
+    }
+
+    public static int Pair(JsonArray cards){
+        cards.get(0).getAsString("rank");
+        return 0;
     }
 }
