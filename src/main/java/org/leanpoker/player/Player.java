@@ -35,14 +35,13 @@ public class Player {
         }
         // get stacks
         for (int i = 0; i < players.size(); i++) {
-            int stack = players.get(i).getAsJsonPrimitive("stack").getAsInt();
-            String player = players.get(i).toString();
-            System.err.println(player);
-            if(players.get(i).getAsString("name").equals("Kekszemu Lowsarkany")){
+            JsonObject player = players.get(i).getAsJsonObject();
+            int stack = player.getAsJsonPrimitive("stack").getAsInt();
+            if(player.get("name").toString().equals("Kekszemu Lowsarkany")){
                 playerStack = stack;
-                playerCards = players.get(i).getAsJsonArray("hole_cards");
+                playerCards = player.getAsJsonArray("hole_cards");
                 // player current bet
-                playerCurrentBet = players.get(i).getAsJsonPrimitive("bet").getAsInt();
+                playerCurrentBet = player.getAsJsonPrimitive("bet").getAsInt();
             } else{
                 enemyStacks.add(stack);
             }
