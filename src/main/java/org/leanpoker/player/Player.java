@@ -127,7 +127,7 @@ public class Player {
                     bet = currentBuyIn - playerCurrentBet;
                 }
             } else{
-                bet = currentBuyIn - playerCurrentBet + minRaise;
+                bet = currentBuyIn - playerCurrentBet + (int)Math.ceil(stack*0.2);
             }
         } else{
             switch (odds){
