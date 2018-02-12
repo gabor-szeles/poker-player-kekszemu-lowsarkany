@@ -59,7 +59,7 @@ public class Player {
 
         int odds = SameCardCases(allcards);
         //minRaise = calculateBet(odds, firstRound, currentBuyIn, playerCurrentBet, minRaise, playerStack);
-        minRaise = braveBetting(minRaise, playerStack);
+        minRaise = braveBetting(minRaise,playerStack,currentBuyIn, playerCurrentBet);
         return minRaise;
     }
 
