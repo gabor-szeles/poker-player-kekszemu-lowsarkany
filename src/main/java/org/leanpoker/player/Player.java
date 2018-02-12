@@ -32,6 +32,8 @@ public class Player {
         //end player bet buy in
         if (communityCards.size() > 0){
             firstRound = false;
+        }else {
+            firstRound = true;
         }
 
         // get stacks
